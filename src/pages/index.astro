@@ -1,0 +1,24 @@
+---
+import About from "@sections/About.astro";
+import Education from "@sections/Education.astro";
+import Experience from "@sections/Experience.astro";
+import Projects from "@sections/Projects.astro";
+import Footer from "@sections/Footer.astro";
+
+import Layout from "../layouts/Layout.astro";
+import NowPlaying from "@ui/NowPlaying.astro";
+---
+
+<Layout title="Portfolio de Gaspar Castillo - Software Developer">
+  <main class="p-4 mt-6 mx-auto flex flex-col gap-6 md:max-w-4xl">
+    <NowPlaying />
+    <About />
+    <Experience />
+    <Projects />
+    <Education />
+  </main>
+
+  <footer class="p-4 pt-0 pb-12 mx-auto flex flex-col gap-6 md:max-w-4xl">
+    <Footer />
+  </footer>
+</Layout>

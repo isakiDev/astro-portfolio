@@ -1,0 +1,78 @@
+---
+import type { PlayingResponse } from "src/interfaces/now-playing.interface";
+import { getNowPlaying } from "../../utils/now-playing.util";
+
+const { isPlaying, albumImageUrl, title, artist }: PlayingResponse =
+  await getNowPlaying({
+    clientId: import.meta.env.PUBLIC_CLIENT_ID,
+    clientSecret: import.meta.env.SECRET_CLIENT_SECRET,
+    refreshToken: import.meta.env.SECRET_REFRESH_TOKEN,
+  });
+
+const isPlayingText = isPlaying ? "playing" : "offline";
+
+const computedData = {
+  playing: {
+    albumImageUrl,
+    title,
+    artist,
+  },
+  offline: {
+    albumImageUrl: "images/albumCover.png",
+    title: "User is",
+    artist: "currently offline",
+  },
+};
+
+const finalData = computedData[isPlayingText];
+---
+
+<article
+  class="border border-green-500/10 bg-secondary rounded-2xl w-fit py-2 px-3 flex items-center gap-4 animate-pulse-fade-in animate-duration-500"
+>
+  <img
+    class="border border-white/10 rounded-lg opacity-80"
+    width="55"
+    src={finalData.albumImageUrl}
+    alt="Album Image"
+  />
+
+  <div>
+    <h2 title={finalData.title} class="text-sm truncate max-w-32">
+      {finalData.title}
+    </h2>
+    <p title={finalData.artist} class="text-xs truncate max-w-32">
+      {finalData.artist}
+    </p>
+  </div>
+
+  {
+    isPlaying ? (
+      <img
+        class="ml-auto opacity-80"
+        width="40"
+        src="images/soundbar.gif"
+        alt="Soundbar"
+      />
+    ) : (
+      <svg
+        class="ml-auto opacity-80"
+        width="35"
+        height="35"
+        viewBox="0 0 24 24"
+        stroke="white"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <>
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18.364 19.364a9 9 0 0 0 -9.721 -14.717m-2.488 1.509a9 9 0 0 0 -.519 13.208" />
+          <path d="M15.536 16.536a5 5 0 0 0 -3.536 -8.536m-3 1a5 5 0 0 0 -.535 7.536" />
+          <path d="M12 12a1 1 0 1 0 1 1" />
+          <path d="M3 3l18 18" />
+        </>
+      </svg>
+    )
+  }
+</article>

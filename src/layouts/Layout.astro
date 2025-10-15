@@ -1,0 +1,118 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const metadata = {
+  description:
+    "Portfolio de Gaspar Castillo, software developer con ambicion a fullstack",
+  url: "https://isakidev.netlify.app/",
+  author: "Gaspar Castillo Catrifol",
+  keywords:
+    "Portfolio, Ingeniero de Software, Node.js, React, Next.js, NestJS, Tailwind CSS, Docker, TypeScript, JavaScript",
+  image:
+    "https://res.cloudinary.com/dzn3nempv/image/upload/c_crop,g_auto,h_800,w_800/portfolio/barjgvkwgi5m6lxf9qyq.jpg",
+  icon: "https://res.cloudinary.com/dzn3nempv/image/upload/c_lfill,h_50,w_50/v1758264381/portfolio/memoji_1_uhppb1.png",
+};
+
+const { description, author, url, keywords, image, icon } = metadata;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+    <meta name="keywords" content={keywords} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png+xml" href={icon} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  body {
+    @apply bg-primary;
+  }
+
+  h1 {
+    @apply text-2xl font-semibold text-neutral-200;
+  }
+
+  h3 {
+    @apply text-lg font-semibold text-neutral-200;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold text-neutral-200;
+  }
+
+  h4 {
+    @apply text-base font-semibold text-neutral-300;
+  }
+
+  p {
+    @apply text-neutral-400;
+  }
+
+  .animate-pulse-fade-in {
+    animation: pulse-fade-in 0.6s ease-out both;
+    animation-delay: 1;
+  }
+
+  .animate-duration-500 {
+    animation-duration: 0.5s;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes pulse-fade-in {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.01;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.5;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>

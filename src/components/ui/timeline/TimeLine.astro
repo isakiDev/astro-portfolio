@@ -1,0 +1,32 @@
+---
+import TimeLineBody from "./TimeLineBody.astro";
+import TimeLineHeader from "./TimeLineHeader.astro";
+
+import { type TimeLineData } from "./time-line.interface";
+
+interface Props {
+  data: TimeLineData[];
+  header?: boolean;
+  body?: boolean;
+}
+
+const { data, header = true, body = true } = Astro.props;
+---
+
+<ol class="relative border-s border-neutral-800">
+  {
+    data?.map(({ date, extraDetails, subTitle, title }) => {
+      return (
+        <li class="ms-3 hover:bg-neutral-800/20 p-4 rounded-xl duration-100 hover:cursor-pointer">
+          <div class="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 bg-neutral-800 border border-neutral-700" />
+
+          {header && (
+            <TimeLineHeader subTitle={subTitle} date={date} title={title} />
+          )}
+
+          {body && <TimeLineBody extraDetails={extraDetails} />}
+        </li>
+      );
+    })
+  }
+</ol>

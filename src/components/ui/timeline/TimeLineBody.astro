@@ -1,0 +1,28 @@
+---
+import ButtonLink from "@ui/ButtonLink.astro";
+import { type TimeLineData } from "./time-line.interface";
+
+interface Props {
+  extraDetails: TimeLineData["extraDetails"];
+}
+
+const { extraDetails } = Astro.props;
+---
+
+<div class="space-y-4 mt-2">
+  {
+    extraDetails?.map(({ description, title, url }) => {
+      return (
+        <div>
+          {title && <h4>{title}</h4>}
+
+          {description && (
+            <p class="mb-4 text-base font-normal">{description}</p>
+          )}
+
+          {url && <ButtonLink href={url}>Leer más</ButtonLink>}
+        </div>
+      );
+    })
+  }
+</div>
