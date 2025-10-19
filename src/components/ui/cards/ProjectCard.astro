@@ -1,5 +1,5 @@
 ---
-// import { Image } from "astro:assets";
+import { Image } from "astro:assets";
 
 import GitHub from "@icons/GitHub.astro";
 import CardButtonLink from "./ButtonLinkCard.astro";
@@ -31,7 +31,7 @@ const { description, skills, title, urlDeploy, urlImage, urlRepository } =
   </header>
 
   <footer class="flex flex-col gap-3">
-    <img
+    <Image
       height={160}
       width={400}
       class="rounded-xl h-40 object-cover object-top"

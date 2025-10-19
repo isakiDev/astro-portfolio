@@ -1,17 +1,18 @@
 ---
-import type { PlayingResponse } from "src/interfaces/now-playing.interface";
-import { getNowPlaying } from "../../utils/now-playing.util";
+import Offline from "@icons/Offline.astro";
+import { getNowPlaying } from "../../services/now-playing.service";
+import { nowPlayingAdapter } from "../../utils/now-playing.adapter";
 
-const { isPlaying, albumImageUrl, title, artist }: PlayingResponse =
-  await getNowPlaying({
-    clientId: import.meta.env.PUBLIC_CLIENT_ID,
-    clientSecret: import.meta.env.SECRET_CLIENT_SECRET,
-    refreshToken: import.meta.env.SECRET_REFRESH_TOKEN,
-  });
+const nowPlaying = await getNowPlaying({
+  clientId: import.meta.env.PUBLIC_SPOTIFY_CLIENT_ID,
+  clientSecret: import.meta.env.SECRET_SPOTIFY_CLIENT_SECRET,
+  refreshToken: import.meta.env.SECRET_SPOTIFY_REFRESH_TOKEN,
+});
 
-const isPlayingText = isPlaying ? "playing" : "offline";
+const { albumImageUrl, title, artist, playingState, isPlaying } =
+  nowPlayingAdapter(nowPlaying);
 
-const computedData = {
+const playbackDisplayByState = {
   playing: {
     albumImageUrl,
     title,
@@ -24,25 +25,29 @@ const computedData = {
   },
 };
 
-const finalData = computedData[isPlayingText];
+const {
+  albumImageUrl: imageUrl,
+  title: titleText,
+  artist: artistText,
+} = playbackDisplayByState[playingState];
 ---
 
 <article
   class="border border-green-500/10 bg-secondary rounded-2xl w-fit py-2 px-3 flex items-center gap-4 animate-pulse-fade-in animate-duration-500"
 >
   <img
-    class="border border-white/10 rounded-lg opacity-80"
+    class="border border-white/10 rounded-2xl opacity-40"
     width="55"
-    src={finalData.albumImageUrl}
+    src={imageUrl}
     alt="Album Image"
   />
 
   <div>
-    <h2 title={finalData.title} class="text-sm truncate max-w-32">
-      {finalData.title}
+    <h2 title={titleText} class="text-sm truncate max-w-32 text-green-600">
+      {titleText}
     </h2>
-    <p title={finalData.artist} class="text-xs truncate max-w-32">
-      {finalData.artist}
+    <p title={artistText} class="text-xs truncate max-w-32">
+      {artistText}
     </p>
   </div>
 
@@ -55,24 +60,7 @@ const finalData = computedData[isPlayingText];
         alt="Soundbar"
       />
     ) : (
-      <svg
-        class="ml-auto opacity-80"
-        width="35"
-        height="35"
-        viewBox="0 0 24 24"
-        stroke="white"
-        stroke-width="1"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <>
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M18.364 19.364a9 9 0 0 0 -9.721 -14.717m-2.488 1.509a9 9 0 0 0 -.519 13.208" />
-          <path d="M15.536 16.536a5 5 0 0 0 -3.536 -8.536m-3 1a5 5 0 0 0 -.535 7.536" />
-          <path d="M12 12a1 1 0 1 0 1 1" />
-          <path d="M3 3l18 18" />
-        </>
-      </svg>
+      <Offline />
     )
   }
 </article>
