@@ -5,8 +5,8 @@ import GitHub from "@icons/GitHub.astro";
 import CardButtonLink from "./ButtonLinkCard.astro";
 
 import { type Project } from "@data/projects.mock";
-import BadgeSkill from "@ui/SkillBadge.astro";
 import ExternalLink from "@icons/ExternalLink.astro";
+import BadgeSkill from "@ui/SkillBadge.astro";
 
 interface Props {
   project: Project;
@@ -36,7 +36,7 @@ const { description, skills, title, urlDeploy, urlImage, urlRepository } =
       width={400}
       class="rounded-xl h-40 object-cover object-top"
       src={urlImage}
-      alt=""
+      alt="Project Image"
     />
 
     <div class="flex items-center gap-2">

@@ -1,7 +1,10 @@
 ---
-import Offline from "@icons/Offline.astro";
+import { Image } from "astro:assets";
+
 import { getNowPlaying } from "../../services/now-playing.service";
 import { nowPlayingAdapter } from "../../utils/now-playing.adapter";
+
+import Offline from "@icons/Offline.astro";
 
 const nowPlaying = await getNowPlaying({
   clientId: import.meta.env.PUBLIC_SPOTIFY_CLIENT_ID,
@@ -19,7 +22,8 @@ const playbackDisplayByState = {
     artist,
   },
   offline: {
-    albumImageUrl: "images/albumCover.png",
+    albumImageUrl:
+      "https://res.cloudinary.com/dzn3nempv/image/upload/v1760909384/portfolio/albumCover_bractr.png",
     title: "User is",
     artist: "currently offline",
   },
@@ -35,9 +39,10 @@ const {
 <article
   class="border border-green-500/10 bg-secondary rounded-2xl w-fit py-2 px-3 flex items-center gap-4 animate-pulse-fade-in animate-duration-500"
 >
-  <img
-    class="border border-white/10 rounded-2xl opacity-40"
-    width="55"
+  <Image
+    class="border border-white/10 rounded-2xl opacity-60"
+    width={55}
+    height={55}
     src={imageUrl}
     alt="Album Image"
   />
@@ -56,8 +61,8 @@ const {
       <img
         class="ml-auto opacity-80"
         width="40"
-        src="images/soundbar.gif"
-        alt="Soundbar"
+        src="https://res.cloudinary.com/dzn3nempv/image/upload/v1760909394/portfolio/soundbar_z2lba4.gif"
+        alt="Soundbar GIF"
       />
     ) : (
       <Offline />
