@@ -4,11 +4,11 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				'primary': '#171717',
-				'secondary': '#191919',
-				'tertiary': '#232323',
-			}
+				primary: '#171717',
+				secondary: '#191919',
+				tertiary: '#232323',
+			},
 		},
 	},
 	plugins: [],
-}
+};
