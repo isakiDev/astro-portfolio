@@ -12,28 +12,20 @@ const nowPlaying = await getNowPlaying({
   refreshToken: import.meta.env.SECRET_SPOTIFY_REFRESH_TOKEN,
 });
 
-const { albumImageUrl, title, artist, playingState, isPlaying } =
-  nowPlayingAdapter(nowPlaying);
-
-const playbackDisplayByState = {
-  playing: {
-    albumImageUrl,
-    title,
-    artist,
-  },
-  offline: {
-    albumImageUrl:
-      "https://res.cloudinary.com/dzn3nempv/image/upload/v1760909384/portfolio/albumCover_bractr.png",
-    title: "User is",
-    artist: "currently offline",
-  },
-};
-
 const {
-  albumImageUrl: imageUrl,
-  title: titleText,
-  artist: artistText,
-} = playbackDisplayByState[playingState];
+  albumImageUrl,
+  title,
+  artist,
+  icon: Icon,
+} = nowPlaying
+  ? nowPlayingAdapter(nowPlaying)
+  : {
+      albumImageUrl:
+        "https://res.cloudinary.com/dzn3nempv/image/upload/v1760909384/portfolio/albumCover_bractr.png",
+      title: "User is",
+      artist: "currently offline",
+      icon: Offline,
+    };
 ---
 
 <article
@@ -43,29 +35,18 @@ const {
     class="border border-white/10 rounded-2xl opacity-60"
     width={55}
     height={55}
-    src={imageUrl}
+    src={albumImageUrl}
     alt="Album Image"
   />
 
   <div>
-    <h2 title={titleText} class="text-sm truncate max-w-32 text-green-600">
-      {titleText}
+    <h2 title={title} class="text-sm truncate max-w-32 text-green-600">
+      {title}
     </h2>
-    <p title={artistText} class="text-xs truncate max-w-32">
-      {artistText}
+    <p title={artist} class="text-xs truncate max-w-32">
+      {artist}
     </p>
   </div>
 
-  {
-    isPlaying ? (
-      <img
-        class="ml-auto opacity-80"
-        width="40"
-        src="https://res.cloudinary.com/dzn3nempv/image/upload/v1760909394/portfolio/soundbar_z2lba4.gif"
-        alt="Soundbar GIF"
-      />
-    ) : (
-      <Offline />
-    )
-  }
+  <Icon />
 </article>

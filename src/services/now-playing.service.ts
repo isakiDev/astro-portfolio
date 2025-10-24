@@ -31,7 +31,7 @@ const getAccessToken = async ({
   return response.json();
 };
 
-export const getNowPlaying = async ({ clientId, clientSecret, refreshToken }: InputAccessToken) => {
+export const getNowPlaying = async ({ clientId, clientSecret, refreshToken }: InputAccessToken): Promise<NowPlayingResponse | null> => {
   try {
     const { access_token } = await getAccessToken({ clientId, clientSecret, refreshToken });
 
@@ -41,7 +41,8 @@ export const getNowPlaying = async ({ clientId, clientSecret, refreshToken }: In
       },
     });
 
-    if (!response.ok || response.status === 204) throw new Error('Unable to Fetch Song')
+    if (!response.ok) throw new Error('Unable to fetch song')
+    if (response.status === 204) return null
 
     const data: NowPlayingResponse = await response.json()
 

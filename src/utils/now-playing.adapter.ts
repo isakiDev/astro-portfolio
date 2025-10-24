@@ -1,6 +1,11 @@
 import type { NowPlayingResponse } from '../interfaces'
 
-type PlayingState = 'playing' | 'offline'
+
+import Pause from '@icons/Pause.astro'
+import SoundBar from '@icons/SoundBar.astro'
+
+type AstroComponent = (props: Record<string, any>) => any;
+type PlayingState = 'playing' | 'paused'
 
 export interface NowPlayingAdapter {
   albumImageUrl: string
@@ -12,6 +17,7 @@ export interface NowPlayingAdapter {
   timeTotal: number
   title: string
   playingState: PlayingState
+  icon: AstroComponent
 }
 
 export const nowPlayingAdapter = (data: NowPlayingResponse): NowPlayingAdapter => ({
@@ -23,5 +29,6 @@ export const nowPlayingAdapter = (data: NowPlayingResponse): NowPlayingAdapter =
   timePlayed: data.progress_ms,
   timeTotal: data.item.duration_ms,
   title: data.item.name,
-  playingState: data.is_playing ? 'playing' : 'offline'
+  playingState: data.is_playing ? 'playing' : 'paused',
+  icon: data.is_playing ? SoundBar : Pause
 })
