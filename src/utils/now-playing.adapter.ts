@@ -1,8 +1,7 @@
-import type { NowPlayingResponse } from '../interfaces'
-
-
 import Pause from '@icons/Pause.astro'
 import SoundBar from '@icons/SoundBar.astro'
+
+import type { NowPlayingResponse } from '../interfaces'
 
 type AstroComponent = (props: Record<string, any>) => any;
 type PlayingState = 'playing' | 'paused'
