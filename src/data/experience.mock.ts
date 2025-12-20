@@ -7,7 +7,7 @@ export const mockExperience: TimeLineData[] = [
       title: "Zurich Santander Chile",
       url: "https://linkedin.com/company/zurich-santander-insurance-america",
     },
-    date: "sep 2024 - sep 2025",
+    date: "sep 2024 - dic 2025",
     extraDetails: [
       {
         title: "Calidad de Datos",
