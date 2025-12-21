@@ -1,9 +1,9 @@
 import type { InputAccessToken, NowPlayingResponse } from "../interfaces";
 
-const ENDPOINTS_URL = {
+const ENDPOINTS_URL = Object.freeze({
   NOW_PLAYING: 'https://api.spotify.com/v1/me/player/currently-playing',
   GET_TOKEN: 'https://accounts.spotify.com/api/token'
-}
+})
 
 const getAccessToken = async ({
   clientId,
