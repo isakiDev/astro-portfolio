@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+}
+
+const { title, description, date } = Astro.props;
+---
+
+<article class="p-4 hover:bg-secondary hover:cursor-pointer duration-300">
+  <div class="inline-flex gap-4 items-center">
+    <h3>{title}</h3>
+    <span class="text-subtext-1 text-xs">{date}</span>
+  </div>
+
+  <p class="text-subtext-0">{description}</p>
+</article>
