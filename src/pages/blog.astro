@@ -1,26 +1,20 @@
 ---
 import { getCollection } from "astro:content";
-import BlogCard from "../components/blog/BlogCard.astro";
+
 import Layout from "../layouts/Layout.astro";
 import Wrapper from "../layouts/Wrapper.astro";
 
-const blog = await getCollection("blog");
+import BlogCard from "../components/blog/BlogCard.astro";
+
+const blog = await getCollection("blog", ({ data }) => {
+  return data.draft === false;
+});
 ---
 
 <Layout title="Blog de Gaspar Castillo - Software Developer">
   <Wrapper>
-    <a href="/">home</a>
-
-    <h1>Blog</h1>
-
-    <section class="space-y-4">
-      {
-        blog.map((post) => {
-          const { ...data } = post.data;
-
-          return <BlogCard {...data} />;
-        })
-      }
+    <section class="flex flex-col gap-4">
+      {blog.map((blog) => <BlogCard entry={blog} />)}
     </section>
   </Wrapper>
 </Layout>
