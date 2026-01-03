@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import About from "@sections/About.astro";
 import Education from "@sections/Education.astro";
 import Experience from "@sections/Experience.astro";
@@ -8,11 +10,14 @@ import Projects from "@sections/Projects.astro";
 import NowPlaying from "@ui/NowPlaying.astro";
 import Layout from "../layouts/Layout.astro";
 import Wrapper from "../layouts/Wrapper.astro";
+import NowPlayingSkeleton from "@ui/NowPlayingSkeleton.astro";
 ---
 
 <Layout title="Portfolio de Gaspar Castillo - Software Developer">
   <Wrapper>
-    <NowPlaying />
+    <NowPlaying server:defer>
+      <NowPlayingSkeleton slot="fallback" />
+    </NowPlaying>
 
     <main class="flex flex-col gap-6">
       <About />
