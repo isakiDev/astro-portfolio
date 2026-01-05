@@ -1,29 +1,23 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
-import { formatDate } from "../../utils/format-date.util";
-
 interface Props {
-  entry: CollectionEntry<"blog">;
+  href: string;
+  title: string;
+  date: string;
+  description: string;
 }
 
-const { entry } = Astro.props;
-
-const { data, collection, slug } = entry;
-const { title, description, date } = data;
-
-const formatedDate = formatDate(date);
+const { href, title, date, description } = Astro.props;
 ---
 
 <article
-  class="p-4 hover:bg-secondary hover:cursor-pointer duration-300 rounded-md"
+  class="px-6 pt-6 min-h-40 bg-card-dark hover:cursor-pointer duration-300 rounded-xl border border-border-dark relative dark:hover:border-gray-700"
 >
-  <a href=`${collection}/${slug}`>
-    <div class="inline-flex gap-4 items-center">
-      <h3>{title}</h3>
-      <span class="text-subtext-1 text-xs">{formatedDate}</span>
-    </div>
+  <a class="absolute inset-0 z-10" href={href}></a>
 
-    <p class="text-subtext-0">{description}</p>
-  </a>
+  <header class="flex justify-between items-center">
+    <h2>{title}</h2>
+    <time class="text-gray-500 text-xs">{date}</time>
+  </header>
+
+  <p class="text-muted-dark-0">{description}</p>
 </article>

@@ -1,41 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @import "tailwindcss";
+
 @import "./animation.css";
 
 @theme {
-  --color-primary: #171717;
-  --color-secondary: #191919;
+  --color-background-dark: #0f0f0f;
+  --color-card-dark: #141414;
+  --color-border-dark: #2a2a2a;
 
-  --color-text: #e5e5e5;
-  --color-subtext-0: #d4d4d4;
-  --color-subtext-1: #a1a1a1;
+  --color-text-dark: #e5e5e5;
+  --color-muted-dark-0: #d4d4d4;
+  --color-muted-dark-1: #a1a1a1;
 }
 
 
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    @apply bg-primary
+    @apply bg-background-dark
   }
 
   h1 {
-    @apply text-2xl font-semibold text-text;
+    @apply text-2xl font-semibold text-text-dark;
   }
 
   h3 {
-    @apply text-lg font-semibold text-text;
+    @apply text-lg font-semibold text-text-dark;
   }
 
   h2 {
-    @apply text-2xl font-semibold text-text;
+    @apply text-2xl font-semibold text-text-dark;
   }
 
   h4 {
-    @apply text-base font-semibold text-subtext-0;
+    @apply text-base font-semibold text-muted-dark-0;
   }
 
   p {
-    @apply text-subtext-1;
+    @apply text-muted-dark-1;
   }
 }

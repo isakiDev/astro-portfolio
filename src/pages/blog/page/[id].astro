@@ -1,0 +1,35 @@
+---
+export const prerender = false;
+
+import Layout from "../../../layouts/Layout.astro";
+import Wrapper from "../../../layouts/Wrapper.astro";
+
+import BlogContainer from "../../../components/blog/BlogContainer.astro";
+import Home from "@icons/Home.astro";
+---
+
+<Layout title="Blog de Gaspar Castillo - Software Developer">
+  <Wrapper>
+    <nav class="text-text-dark font-semibold pb-5">
+      <ul class="flex gap-2">
+        <li class="hover:underline">
+          <a
+            class="inline-flex justify-center items-center gap-2 text-muted-dark-1"
+            href="/"
+          >
+            <Home />
+            Inicio
+          </a>
+        </li>
+
+        <span class="text-slate-700">/</span>
+
+        <li class="hover:underline"><a href="/blog/page/1">Blog</a></li>
+      </ul>
+    </nav>
+
+    <main class="flex flex-col gap-4">
+      <BlogContainer />
+    </main>
+  </Wrapper>
+</Layout>
