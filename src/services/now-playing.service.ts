@@ -41,13 +41,13 @@ export const getNowPlaying = async ({ clientId, clientSecret, refreshToken }: In
       },
     });
 
-    if (!response.ok) throw new Error('Unable to fetch song')
     if (response.status === 204) return null
+    if (!response.ok) throw new Error('Unable to fetch song')
 
     const data: NowPlayingResponse = await response.json()
 
     return data
   } catch (error) {
-    throw new Error('Unexpected Error')
+    return null
   }
 };
