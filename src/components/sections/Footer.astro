@@ -1,21 +1,9 @@
 ---
-import SocialButtonLinks from "@ui/SocialButtonLinks.astro";
-
 const currentYear = new Date().getFullYear();
 ---
 
-<section
-  class="bg-card-dark rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6 animate-pulse-fade-in animate-duration-500 animate-delay-500"
->
-  <div
-    class="flex w-full items-center justify-between text-neutral-200 text-sm font-semibold"
-  >
-    <div>
-      {currentYear}
-      <span class="opacity-50">-</span>
-      Gaspar Castillo 🐧
-    </div>
-
-    <SocialButtonLinks />
-  </div>
-</section>
+<footer class="border-t py-4 text-zinc-400/40">
+  <small class="font-medium">
+    © {currentYear} Gaspar Castillo Catrifol. Diseñado con café y código ☕
+  </small>
+</footer>

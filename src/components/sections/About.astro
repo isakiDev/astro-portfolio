@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 
 import BadgeWork from "@ui/WorkBadge.astro";
-import SocialButtonLinks from "@ui/SocialButtonLinks.astro";
+import SocialLinks from "@ui/SocialLinks.astro";
 import ButtonLink from "@ui/ButtonLink.astro";
 
-import FileExport from "@icons/FileExport.astro";
+import Download from "@icons/Download.astro";
 ---
 
 <section
@@ -31,18 +31,20 @@ import FileExport from "@icons/FileExport.astro";
   <div class="flex flex-col gap-4">
     <header class="flex flex-wrap gap-2 sm:gap-0 items-center justify-between">
       <BadgeWork />
-      <SocialButtonLinks />
+      <SocialLinks />
     </header>
 
-    <div class="space-y-1">
+    <div>
       <h1>Gaspar Castillo Catrifol</h1>
-      <p>
-        <strong class="text-green-200">Software Developer</strong> con una profunda
-        pasión por las nuevas tecnologías y la innovación. Especializado en <strong
-          class="text-green-200">Backend</strong
-        >, pero con la ambición de expandir mis habilidades hacia el desarrollo
-        FullStack. Mi objetivo es crear soluciones escalables que dejen una
-        marca personal duradera.
+      <span class="text-green-500 font-semibold">Software Developer</span>
+
+      <p class="mt-2 leading-relaxed">
+        Apasionado por el desarrollo de software, con foco en
+        <span
+          class="text-text-dark underline decoration-green-800 font-semibold"
+          >Backend</span
+        > y en constante aprendizaje para crecer hacia FullStack. Me interesa construir
+        soluciones sólidas y mantenibles.
       </p>
     </div>
 
@@ -50,10 +52,11 @@ import FileExport from "@icons/FileExport.astro";
       <ButtonLink
         href="cv_gaspar_castillo.pdf"
         role="link"
-        class={"outline-1 outline-dashed outline-gray-400 hover:outline-gray-200"}
+        class="bg-zinc-800/40 px-4 py-2 text-text-dark"
+        }
       >
-        <FileExport className="mr-1" />
-        Mi CV
+        <Download />
+        Descargar CV
       </ButtonLink>
     </footer>
   </div>

@@ -1,4 +1,4 @@
-import type { TimeLineData } from "@ui/timeline/time-line.interface";
+import type { TimeLineData } from "../interfaces";
 
 export const mockEducation: TimeLineData[] = [
   {

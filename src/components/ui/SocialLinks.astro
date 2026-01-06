@@ -1,0 +1,15 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+
+import { mockSocials } from "@data/socials.mock";
+---
+
+<div class="flex items-center gap-3">
+  {
+    mockSocials?.map(({ name, href, icon: Icon }) => (
+      <ButtonLink aria-label={name} href={href} class="text-zinc-400">
+        <Icon />
+      </ButtonLink>
+    ))
+  }
+</div>
