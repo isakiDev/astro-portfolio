@@ -5,21 +5,22 @@ import TimeLineHeader from "./TimeLineHeader.astro";
 import { type TimeLineData } from "../../../interfaces";
 
 interface Props {
-  data: TimeLineData[];
+  items: TimeLineData[];
 }
 
-const { data } = Astro.props;
+const { items } = Astro.props;
 ---
 
-<ol class="relative border-s border-border-dark ml-2">
+<ol class="relative border-s border-border-dark ml-2 timeline">
   {
-    data?.map((data) => (
-      <li class="ms-3 p-4 rounded-xl duration-100">
+    items?.map((data) => (
+      <li class="ms-3 pt-4 pl-5 rounded-xl duration-100">
         {/* line */}
-        <div class="absolute size-2 rounded-full mt-1.5 -start-1 bg-neutral-800 outline-3 outline-zinc-400" />
+        <div class="absolute size-2 rounded-full mt-2 md:mt-2.5 -start-1 bg-neutral-800 outline-3 outline-zinc-400" />
 
         <TimeLineHeader {...data} />
-        <TimeLineBody extraDetails={data.extraDetails} />
+
+        {data.extraDetails && <TimeLineBody extraDetails={data.extraDetails} />}
       </li>
     ))
   }

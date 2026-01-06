@@ -10,7 +10,13 @@ interface Props {
 const { subTitle, date, title } = Astro.props;
 ---
 
-<header class="flex justify-between flex-wrap gap-2">
+<header class="flex flex-col md:flex-row md:justify-between gap-2">
+  <time
+    class="text-xs font-normal text-muted-dark-1 bg-zinc-800/30 size-fit shrink-0 px-3 py-1 rounded-full md:order-2"
+  >
+    {date}
+  </time>
+
   <div>
     <h3>{title}</h3>
 
@@ -22,10 +28,4 @@ const { subTitle, date, title } = Astro.props;
       {subTitle.title}
     </a>
   </div>
-
-  <time
-    class="text-xs font-normal text-muted-dark-1 bg-zinc-800/30 size-fit px-3 py-1 rounded-full"
-  >
-    {date}
-  </time>
 </header>

@@ -11,7 +11,9 @@ interface Props {
 const { extraDetails } = Astro.props;
 ---
 
-<ul class="mt-4 bg-zinc-800/30 py-4 px-6 rounded-xl border border-border-dark">
+<ul
+  class="mt-4 bg-zinc-800/30 py-4 px-6 rounded-xl border border-border-dark space-y-4"
+>
   {
     extraDetails?.map(({ description, title, url }) => {
       return (
@@ -23,9 +25,7 @@ const { extraDetails } = Astro.props;
             </h4>
           )}
 
-          <p class="text-sm sm:text-base leading-relaxed text-muted-dark-1">
-            {description}
-          </p>
+          <p class="text-sm sm:text-base leading-relaxed">{description}</p>
 
           {url && (
             <ButtonLink href={url} class="text-muted-dark-0 pt-4 group">
