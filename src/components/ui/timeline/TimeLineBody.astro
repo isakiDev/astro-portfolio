@@ -25,12 +25,12 @@ const { extraDetails } = Astro.props;
             </h4>
           )}
 
-          <p class="text-sm sm:text-base leading-relaxed">{description}</p>
+          <p>{description}</p>
 
           {url && (
             <ButtonLink href={url} class="text-muted-dark-0 pt-4 group">
               Ver detalles
-              <ArrowRight className=" ml-0.5 opacity-70 group-hover:opacity-100 duration-200 group-hover:translate-x-[1.5px]" />
+              <ArrowRight className="ml-0.5 opacity-70 group-hover:opacity-100 duration-200 group-hover:translate-x-[1.5px]" />
             </ButtonLink>
           )}
         </li>
