@@ -2,8 +2,6 @@
 
 @import "tailwindcss";
 
-@import "./animation.css";
-
 @theme {
   --color-background-dark: #0f0f0f;
   --color-card-dark: #141414;
@@ -18,26 +16,26 @@
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    @apply bg-background-dark
+    @apply bg-background-dark text-text-dark;
   }
 
   h1 {
-    @apply text-2xl font-semibold text-text-dark;
-  }
-
-  h3 {
-    @apply text-lg font-semibold text-text-dark;
+    @apply text-3xl sm:text-4xl font-semibold tracking-tight;
   }
 
   h2 {
-    @apply text-2xl font-semibold text-text-dark;
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-lg sm:text-xl font-semibold;
   }
 
   h4 {
-    @apply text-base font-semibold text-muted-dark-0;
+    @apply text-sm sm:text-base font-medium text-muted-dark-0;
   }
 
   p {
-    @apply text-muted-dark-1;
+    @apply text-sm sm:text-base text-muted-dark-1 leading-relaxed;
   }
 }

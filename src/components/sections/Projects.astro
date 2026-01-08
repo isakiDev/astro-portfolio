@@ -8,15 +8,13 @@ import ButtonLink from "@ui/ButtonLink.astro";
 import CardProject from "@ui/cards/ProjectCard.astro";
 ---
 
-<section
-  class="bg-card-dark rounded-2xl p-8 flex flex-col gap-6 animate-pulse-fade-in animate-duration-500 animate-delay-300"
->
+<section class="bg-card-dark rounded-2xl p-8 flex flex-col gap-6">
   <div class="flex gap-4 items-center">
     <Star />
     <h2>Proyectos</h2>
   </div>
 
-  <div class="grid sm:grid-cols-2 gap-3">
+  <div class="grid sm:grid-cols-2 gap-3 mb-4">
     {mockProjects.map((project) => <CardProject project={project} />)}
   </div>
 
@@ -24,7 +22,7 @@ import CardProject from "@ui/cards/ProjectCard.astro";
     Más proyectos
 
     <ArrowRight
-      className="size-4 ml-0.5 opacity-70 group-hover:opacity-100 duration-200 group-hover:translate-x-[1.5px]"
+      class="ml-0.5 opacity-70 group-hover:opacity-100 duration-200 group-hover:translate-x-[1.5px]"
     />
   </ButtonLink>
 </section>

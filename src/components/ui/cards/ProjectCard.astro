@@ -2,11 +2,11 @@
 import { Image } from "astro:assets";
 
 import GitHub from "@icons/GitHub.astro";
-import CardButtonLink from "./ButtonLinkCard.astro";
 
 import { type Project } from "@data/projects.mock";
 import ExternalLink from "@icons/ExternalLink.astro";
 import BadgeSkill from "@ui/SkillBadge.astro";
+import ButtonLink from "@ui/ButtonLink.astro";
 
 interface Props {
   project: Project;
@@ -18,41 +18,45 @@ const { description, skills, title, urlDeploy, urlImage, urlRepository } =
   project;
 ---
 
-<article
-  class="flex flex-col justify-between hover:bg-neutral-800/20 rounded-2xl p-4 hover:cursor-pointer"
->
+<article class="flex flex-col gap-4 rounded-xl p-5 outline outline-border-dark">
   <header>
     <h3>{title}</h3>
     <p>{description}</p>
-
-    <div class="flex flex-wrap gap-2 pt-2 pb-3">
-      {skills?.map((name) => <BadgeSkill>{name}</BadgeSkill>)}
-    </div>
   </header>
 
-  <footer class="flex flex-col gap-3">
+  <div class="flex flex-wrap gap-2">
+    {skills?.map((name) => <BadgeSkill>{name}</BadgeSkill>)}
+  </div>
+
+  <footer class="space-y-3 mt-auto">
     <Image
       height={160}
-      width={400}
-      class="rounded-xl h-40 object-cover object-top"
+      width={500}
+      class="rounded-lg h-40 object-cover object-top"
       src={urlImage}
       alt="Project Image"
     />
 
-    <div class="flex items-center gap-2">
+    <div class="flex gap-2">
       {
         urlRepository && (
-          <CardButtonLink aria-label="Ver Repositorio" href={urlRepository}>
+          <ButtonLink
+            class="bg-neutral-800 py-2.5 flex-1 rounded-lg"
+            href={urlRepository}
+          >
             <GitHub className="size-4 text-neutral-50" />
-          </CardButtonLink>
+          </ButtonLink>
         )
       }
 
       {
         urlDeploy && (
-          <CardButtonLink aria-label="Ver Deploy" href={urlDeploy}>
+          <ButtonLink
+            class="bg-neutral-800 py-2.5 flex-1 rounded-lg"
+            href={urlDeploy}
+          >
             <ExternalLink className="size-4 text-neutral-50" />
-          </CardButtonLink>
+          </ButtonLink>
         )
       }
     </div>

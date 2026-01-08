@@ -13,7 +13,7 @@ const bars = [
   {
     bars.map((bar) => (
       <span
-        class="w-1 bg-green-500 rounded-full animate-eq"
+        class="w-1 h-full bg-green-500 rounded-full animate-eq"
         style={`
           animation-delay: ${bar.delay}ms;
           animation-duration: ${bar.duration}ms;
@@ -26,28 +26,36 @@ const bars = [
 <style>
   @keyframes eq {
     0% {
-      height: 30%;
+      transform: scaleY(0.3);
     }
-    20% {
-      height: 70%;
+    10% {
+      transform: scaleY(0.6);
+    }
+    25% {
+      transform: scaleY(0.9);
     }
     40% {
-      height: 50%;
+      transform: scaleY(0.5);
     }
-    60% {
-      height: 90%;
+    55% {
+      transform: scaleY(0.8);
     }
-    80% {
-      height: 40%;
+    70% {
+      transform: scaleY(0.4);
+    }
+    85% {
+      transform: scaleY(0.7);
     }
     100% {
-      height: 60%;
+      transform: scaleY(0.5);
     }
   }
 
   .animate-eq {
+    transform-origin: bottom;
     animation-name: eq;
     animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
 </style>
