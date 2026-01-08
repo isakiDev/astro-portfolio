@@ -1,9 +1,9 @@
 ---
-interface Props {
-  className?: string;
-}
+import type { JSX } from "astro/jsx-runtime";
 
-const { className } = Astro.props;
+type Props = JSX.IntrinsicElements["svg"];
+
+const { class: className } = Astro.props;
 ---
 
 <svg
