@@ -1,0 +1,39 @@
+---
+import type { TimelineData } from "@shared/types/time-line.interface";
+import ButtonLink from "../ButtonLink.astro";
+import ArrowRight from "@shared/icons/ArrowRight.astro";
+
+interface Props {
+  extraDetails: TimelineData["extraDetails"];
+}
+
+const { extraDetails } = Astro.props;
+---
+
+<ul
+  class="mt-4 bg-zinc-800/30 py-4 px-6 rounded-xl border border-border-dark space-y-4"
+>
+  {
+    extraDetails?.map(({ description, title, url }) => {
+      return (
+        <li>
+          {title && (
+            <h4 class="flex items-center gap-2 text-muted-dark-0 text-sm font-medium md:text-base">
+              <span class="w-1 h-1 rounded-full bg-white" aria-hidden="true" />
+              {title}
+            </h4>
+          )}
+
+          <p>{description}</p>
+
+          {url && (
+            <ButtonLink href={url} class="text-muted-dark-0 pt-4 group">
+              Ver detalles
+              <ArrowRight class="ml-0.5 opacity-70 group-hover:opacity-100 duration-200 group-hover:translate-x-[1.5px]" />
+            </ButtonLink>
+          )}
+        </li>
+      );
+    })
+  }
+</ul>

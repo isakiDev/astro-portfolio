@@ -3,10 +3,21 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@sections/*": ["src/components/sections/*"],
-      "@ui/*": ["src/components/ui/*"],
-      "@data/*": ["src/data/*"],
-      "@icons/*": ["src/icons/*"]
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@features/*": [
+        "src/features/*"
+      ],
+      "@shared/*": [
+        "src/shared/*"
+      ],
+      "@content/*": [
+        "src/content/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ]
     }
   }
 }

@@ -1,0 +1,27 @@
+---
+import type { TimelineData } from "@shared/types/time-line.interface";
+
+import TimelineBody from "./TimelineBody.astro";
+import TimelineHeader from "./TimelineHeader.astro";
+
+interface Props {
+  items: TimelineData[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="relative border-s border-border-dark ml-2 Timeline">
+  {
+    items?.map((data) => (
+      <li class="ms-3 pt-4 pl-5 rounded-xl duration-100">
+        {/* line */}
+        <div class="absolute size-2 rounded-full mt-2 md:mt-2.5 -start-1 bg-neutral-800 outline-3 outline-zinc-400" />
+
+        <TimelineHeader {...data} />
+
+        {data.extraDetails && <TimelineBody extraDetails={data.extraDetails} />}
+      </li>
+    ))
+  }
+</ol>
