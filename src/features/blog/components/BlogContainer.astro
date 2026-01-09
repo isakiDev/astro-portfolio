@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+
+import BlogCard from "./BlogCard.astro";
+
+import { paginate } from "@shared/utils/pagination.util";
+import { formatDate } from "@shared/utils/format-date.util";
+import Pagination from "@shared/components/ui/Pagination.astro";
+
+const pageParam = Number(Astro.params.id);
+
+const blog = await getCollection("blog", ({ data }) => {
+  return data.draft === false;
+});
+
+const test = Array(20)
+  .fill(null)
+  .map(() => blog[0]);
+
+const { paginatedItems, currentPage, totalPages } = paginate({
+  items: test.map(({ data, slug, collection }) => ({
+    ...data,
+    href: `/${collection}/${slug}`,
+  })),
+  currentPage: pageParam,
+  perPage: 3,
+});
+---
+
+<ul class="flex flex-col gap-4">
+  {
+    paginatedItems.map(({ title, date, description, href }) => {
+      const formatedDate = formatDate(date);
+
+      return (
+        <li>
+          <BlogCard
+            href={href}
+            title={title}
+            date={formatedDate}
+            description={description}
+          />
+        </li>
+      );
+    })
+  }
+
+  <Pagination currentPage={currentPage} totalPages={totalPages} />
+</ul>

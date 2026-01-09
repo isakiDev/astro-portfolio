@@ -1,11 +1,12 @@
 ---
+import Layout from "@app/layouts/Layout.astro";
+import Wrapper from "@app/layouts/Wrapper.astro";
+
+import BlogContainer from "@features/blog/components/BlogContainer.astro";
+
+import Home from "@shared/icons/Home.astro";
+
 export const prerender = false;
-
-import Layout from "../../../layouts/Layout.astro";
-import Wrapper from "../../../layouts/Wrapper.astro";
-
-import BlogContainer from "../../../components/blog/BlogContainer.astro";
-import Home from "@icons/Home.astro";
 ---
 
 <Layout title="Blog de Gaspar Castillo - Software Developer">
