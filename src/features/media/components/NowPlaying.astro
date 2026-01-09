@@ -1,0 +1,47 @@
+---
+import { getNowPlaying } from "../services/now-playing.service";
+
+import Vinyl from "@shared/components/ui/Vinyl.astro";
+import Offline from "@shared/icons/Offline.astro";
+
+import { nowPlayingAdapter } from "@shared/utils/now-playing.adapter";
+
+const nowPlaying = await getNowPlaying({
+  clientId: import.meta.env.PUBLIC_SPOTIFY_CLIENT_ID,
+  clientSecret: import.meta.env.SECRET_SPOTIFY_CLIENT_SECRET,
+  refreshToken: import.meta.env.SECRET_SPOTIFY_REFRESH_TOKEN,
+});
+
+const {
+  albumImageUrl,
+  title,
+  artist,
+  icon: Icon,
+  isPlaying,
+} = nowPlaying
+  ? nowPlayingAdapter(nowPlaying)
+  : {
+      albumImageUrl:
+        "https://res.cloudinary.com/dzn3nempv/image/upload/v1760909384/portfolio/albumCover_bractr.png",
+      title: "Usuario",
+      artist: "desconectado",
+      icon: Offline,
+    };
+---
+
+<aside
+  class="outline outline-green-950 bg-card-dark rounded-2xl w-fit py-2 px-3 flex items-center gap-4"
+>
+  <Vinyl imageUrl={albumImageUrl} isPlaying={!!isPlaying} />
+
+  <div>
+    <h2 title={title} class="text-sm truncate max-w-32 text-green-600">
+      {title}
+    </h2>
+    <p title={artist} class="text-xs truncate max-w-32">
+      {artist}
+    </p>
+  </div>
+
+  <Icon />
+</aside>

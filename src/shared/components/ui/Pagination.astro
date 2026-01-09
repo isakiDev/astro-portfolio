@@ -1,0 +1,21 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+}
+
+const { currentPage, totalPages } = Astro.props;
+
+const classToSelectedPage = (index: number) => currentPage === index + 1 ? 'bg-white text-black' : 'text-muted-dark-1';
+---
+<nav class="flex bg-card-dark rounded-lg w-fit border border-border-dark px-4 py-2">
+  {
+    Array(totalPages)
+      .fill(null)
+      .map((_, index) => (
+        <a class=`${classToSelectedPage(index)} px-4 py-2 rounded-md font-medium`>
+          {index + 1}
+        </a>
+      ))
+  }
+</>

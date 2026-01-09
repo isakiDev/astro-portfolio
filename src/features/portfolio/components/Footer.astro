@@ -1,0 +1,15 @@
+---
+import SocialLinks from "@shared/components/ui/SocialLinks.astro";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class="flex flex-col gap-4 md:gap-0 justify-center items-center md:flex-row md:justify-between border-t py-4 text-muted-dark-1/50 px-8"
+>
+  <small class="font-medium">
+    © {currentYear} Gaspar Castillo Catrifol. Diseñado con café y código ☕
+  </small>
+
+  <SocialLinks />
+</footer>

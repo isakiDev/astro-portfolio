@@ -1,24 +1,32 @@
 ---
-import About from "@sections/About.astro";
-import Education from "@sections/Education.astro";
-import Experience from "@sections/Experience.astro";
-import Projects from "@sections/Projects.astro";
-import Footer from "@sections/Footer.astro";
+import Layout from "@app/layouts/Layout.astro";
+import Wrapper from "@app/layouts/Wrapper.astro";
 
-import Layout from "../layouts/Layout.astro";
-import NowPlaying from "@ui/NowPlaying.astro";
+import NowPlaying from "@features/media/components/NowPlaying.astro";
+import NowPlayingSkeleton from "@features/media/components/NowPlayingSkeleton.astro";
+
+import About from "@features/portfolio/components/About.astro";
+import Education from "@features/portfolio/components/Education.astro";
+import Experience from "@features/portfolio/components/Experience.astro";
+import Footer from "@features/portfolio/components/Footer.astro";
+import Projects from "@features/portfolio/components/Projects.astro";
+
+export const prerender = false;
 ---
 
 <Layout title="Portfolio de Gaspar Castillo - Software Developer">
-  <main class="p-4 mt-6 mx-auto flex flex-col gap-6 md:max-w-4xl">
-    <NowPlaying />
-    <About />
-    <Experience />
-    <Projects />
-    <Education />
-  </main>
+  <Wrapper>
+    <NowPlaying server:defer>
+      <NowPlayingSkeleton slot="fallback" />
+    </NowPlaying>
 
-  <footer class="p-4 pt-0 pb-12 mx-auto flex flex-col gap-6 md:max-w-4xl">
+    <main class="flex flex-col gap-6">
+      <About />
+      <Experience />
+      <Projects />
+      <Education />
+    </main>
+
     <Footer />
-  </footer>
+  </Wrapper>
 </Layout>

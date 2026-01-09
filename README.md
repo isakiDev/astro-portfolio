@@ -1,58 +1,77 @@
-# Astro Starter Kit: Basics
+# 🌟 Portfolio Personal - Gaspar Castillo
 
-```sh
-npm create astro@latest -- --template basics
-```
+> Portafolio desarrollado con [Astro](https://astro.build/), TailwindCSS y TypeScript.
+> Organizado siguiendo un **Feature-Based Structure**, donde cada dominio funcional tiene su propia carpeta y los recursos compartidos están centralizados en `shared/`.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📸 Captura del Proyecto
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+![Captura del Portfolio](./public/preview.png)
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🗂️ Estructura del Proyecto
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
+```plaintext
+src/
+├── features/
+│   ├── portfolio/
+│   │   ├── components/
+│   │   ├── types/
+│   │   └── data/
+│   ├── blog/
+│   │   ├── components/
+│   │   ├── types/
+│   │   └── data/
+│   └── media/
+│       ├── components/
+│       ├── types/
+│       └── data/
+├── shared/
 │   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── icons/
+│   ├── types/
+│   └── utils/
+└── pages/
+    ├── index.astro
+    └── blog/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🛠 Tecnologías Utilizadas
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **[Astro](https://astro.build/)** – Framework frontend moderno  
+- **[TypeScript](https://www.typescriptlang.org/)** – Tipado estático para JavaScript  
+- **[TailwindCSS](https://tailwindcss.com/)** – Sistema de utilidades para estilos  
+- **[PNPM](https://pnpm.io/)** – Gestor de paquetes rápido y eficiente  
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## 🚀 Características Destacadas
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Estructura modular basada en **features**, facilitando escalabilidad y mantenibilidad.  
+- Cada feature contiene sus **propios componentes, tipos y datos**, reduciendo dependencias cruzadas.  
+- Recursos compartidos y utilidades en `shared/` para máxima reutilización.  
+- Configuraciones globales y providers en `app/`.  
+- Fácil integración de nuevos contenidos y páginas mediante Content Collections de Astro.  
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## ⚡ Instalación y Uso
 
+```bash
+# Clonar repositorio
+git clone https://github.com/isakiDev/astro-portfolio.git
+cd astro-portfolio
 
-# inspiration
-- https://felipego.com/#top
+# Instalar dependencias
+pnpm install
+
+# Ejecutar en modo desarrollo
+pnpm dev
+
+# Construir para producción
+pnpm build
+```

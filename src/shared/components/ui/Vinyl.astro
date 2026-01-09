@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  imageUrl: string;
+  isPlaying: boolean;
+}
+
+const { imageUrl, isPlaying } = Astro.props;
+
+const spinAnimationClass = "animate-spin [animation-duration:7s]";
+---
+
+<div
+  class=`relative flex items-center justify-center size-16 rounded-full bg-background-dark outline-[0.5px] outline-border-dark ${isPlaying ? spinAnimationClass : ''}`
+>
+  <!-- lines -->
+  <div class="absolute inset-0 rounded-full vinyl-lines"></div>
+
+  {/* orifice */}
+  <div class="absolute size-2 rounded-full bg-[#1f1f1f] z-10"></div>
+
+  <Image
+    class="rounded-full outline-1 outline-border-dark"
+    width={33}
+    height={33}
+    src={imageUrl}
+    alt="Album Image"
+  />
+</div>
+
+<style>
+  .vinyl-lines {
+    background: repeating-radial-gradient(
+      circle,
+      transparent 3px,
+      rgba(255, 255, 255, 0.035) 3.5px,
+      transparent 5px
+    );
+
+    mask-image: radial-gradient(circle, black 0 60%, transparent 61%);
+  }
+</style>
