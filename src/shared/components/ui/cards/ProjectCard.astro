@@ -4,10 +4,10 @@ import { Image } from "astro:assets";
 import ButtonLink from "../ButtonLink.astro";
 import SkillBadge from "../SkillBadge.astro";
 
-import type { Project } from "@features/portfolio/data/projects.mock";
-
 import GitHub from "@shared/icons/GitHub.astro";
 import ExternalLink from "@shared/icons/ExternalLink.astro";
+
+import { type Project } from "@features/portfolio/types/portfolio.interface";
 
 interface Props {
   project: Project;
