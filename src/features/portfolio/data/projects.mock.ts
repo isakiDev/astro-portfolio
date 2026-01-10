@@ -1,17 +1,8 @@
-export interface Project {
-  title: string;
-  date?: string;
-  description: string;
-  skills: string[];
-  urlImage: string;
-  urlRepository?: string;
-  urlDeploy?: string;
-}
+import type { Project } from "../types/portfolio.interface";
 
 export const mockProjects: Project[] = [
   {
     title: "Fashion Like",
-    date: "feb 2024 - abr 2024",
     description:
       "Red social dedicada al mundo de la moda, donde los usuarios pueden exhibir sus estilos más destacados.",
     skills: [
