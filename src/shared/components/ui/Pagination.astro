@@ -1,4 +1,6 @@
 ---
+import { getPagination, isActivePage } from "@shared/utils/pagination.util";
+
 interface Props {
   currentPage: number;
   totalPages: number;
@@ -6,16 +8,41 @@ interface Props {
 
 const { currentPage, totalPages } = Astro.props;
 
-const classToSelectedPage = (index: number) => currentPage === index + 1 ? 'bg-white text-black' : 'text-muted-dark-1';
+const pages = getPagination(currentPage, totalPages);
 ---
-<nav class="flex bg-card-dark rounded-lg w-fit border border-border-dark px-4 py-2">
+
+<nav
+  class="bg-card-dark rounded-lg w-fit border border-border-dark px-3 py-4 mx-auto mt-10"
+>
   {
-    Array(totalPages)
-      .fill(null)
-      .map((_, index) => (
-        <a class=`${classToSelectedPage(index)} px-4 py-2 rounded-md font-medium`>
-          {index + 1}
+    pages.map((page, _) => {
+      if (page === "..." || typeof page === "string") {
+        return (
+          <span
+            class="px-4 py-2 text-muted-dark-2 select-none"
+            aria-hidden="true"
+          >
+            …
+          </span>
+        );
+      }
+
+      const isCurrentPageActive = isActivePage(page, currentPage);
+
+      return (
+        <a
+          href={`${page}`}
+          class:list={[
+            "px-4 py-2 rounded-md font-medium",
+            {
+              "bg-white text-black": isCurrentPageActive,
+              "text-muted-dark-1 hover:text-white": !isCurrentPageActive,
+            },
+          ]}
+        >
+          {page}
         </a>
-      ))
+      );
+    })
   }
-</>
+</nav>
