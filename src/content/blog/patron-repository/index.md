@@ -6,7 +6,7 @@ tags: ["repository", "patrones-de-diseno"]
 draft: false
 ---
 
-### Patrón Repository
+## Patrón Repository
 
 El patrón Repository es un patrón de diseño que se utiliza para abstraer la lógica de acceso a datos. Este patrón proporciona una interfaz común para interactuar con los datos, independientemente del tipo de base de datos o fuente de datos utilizada.
 
