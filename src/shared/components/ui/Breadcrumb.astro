@@ -1,5 +1,5 @@
 ---
-import ChevronRight from "@shared/icons/ChevronRight.astro";
+import ChevronRight from "@shared/components/icons/ChevronRight.astro";
 
 interface BreadcrumbItem {
   name: string;
@@ -13,8 +13,8 @@ interface Props {
 const { breadcrumbs } = Astro.props;
 ---
 
-<nav class="font-semibold pb-4">
-  <ol class="inline-flex text-muted-dark-1">
+<nav>
+  <ol class="inline-flex text-muted-dark-1 font-semibold">
     {
       breadcrumbs.map(({ name, href }, index) => {
         const isLastChild = index + 1 === breadcrumbs.length;
@@ -31,6 +31,7 @@ const { breadcrumbs } = Astro.props;
             <a class="not-last:hover:text-muted-dark-0" href={href}>
               {name}
             </a>
+
             {!isLastChild && <ChevronRight class={"size-4 mx-1"} />}
           </li>
         );

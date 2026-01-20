@@ -1,7 +1,7 @@
 import type { NowPlayingResponse } from "@features/media/types/now-playing.interface";
 
-import Pause from "../icons/Pause.astro"
-import Sounbar from "../icons/Soundbar.astro"
+import Pause from "@shared/components/icons/Pause.astro"
+import Sounbar from "@shared/components/icons/Soundbar.astro"
 
 type AstroComponent = (props: Record<string, any>) => any;
 type PlayingState = 'playing' | 'paused'

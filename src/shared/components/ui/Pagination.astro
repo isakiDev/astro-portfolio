@@ -12,7 +12,7 @@ const pages = getPagination(currentPage, totalPages);
 ---
 
 <nav
-  class="bg-card-dark rounded-lg w-fit border border-border-dark px-3 py-4 mx-auto mt-10"
+  class="flex justify-center items-center bg-card-dark rounded-xl border border-border-dark mt-10 py-2 px-3 w-fit mx-auto"
 >
   {
     pages.map((page, _) => {
@@ -33,7 +33,7 @@ const pages = getPagination(currentPage, totalPages);
         <a
           href={`${page}`}
           class:list={[
-            "px-4 py-2 rounded-md font-medium",
+            "px-4 py-2 rounded-lg font-medium",
             {
               "bg-white text-black": isCurrentPageActive,
               "text-muted-dark-1 hover:text-white": !isCurrentPageActive,
