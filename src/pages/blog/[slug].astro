@@ -2,8 +2,8 @@
 import { getCollection, getEntry, render } from "astro:content";
 
 import Layout from "@app/layouts/Layout.astro";
-import Wrapper from "@app/layouts/Wrapper.astro";
 import Breadcrumb from "@shared/components/ui/Breadcrumb.astro";
+import ContentWrapper from "@app/layouts/ContentWrapper.astro";
 
 export async function getStaticPaths() {
   const articles = await getCollection("blog", ({ data }) => {
@@ -35,8 +35,11 @@ const breadcrumbs = [
 <Layout
   title={`${article.data.title} | Blog - Gaspar Castillo - Software Developer`}
 >
-  <Wrapper>
+  <ContentWrapper>
     <Breadcrumb breadcrumbs={breadcrumbs} />
-    <Content />
-  </Wrapper>
+
+    <div class="prose dark:prose-invert lg:max-w-3xl">
+      <Content />
+    </div>
+  </ContentWrapper>
 </Layout>
