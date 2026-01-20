@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+
+import GitHub from "@shared/components/icons/GitHub.astro";
+import ExternalLink from "@shared/components/icons/ExternalLink.astro";
+
+import { type Project } from "@features/portfolio/types/portfolio.interface";
+import SkillBadge from "@shared/components/ui/SkillBadge.astro";
+import ButtonLink from "@shared/components/ui/ButtonLink.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const { description, skills, title, urlDeploy, urlImage, urlRepository } =
+  project;
+---
+
+<article class="flex flex-col gap-4 rounded-xl p-5 outline outline-border-dark">
+  <header>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </header>
+
+  <div class="flex flex-wrap gap-2">
+    {skills?.map((name) => <SkillBadge>{name}</SkillBadge>)}
+  </div>
+
+  <footer class="space-y-3 mt-auto">
+    <Image
+      height={160}
+      width={500}
+      class="rounded-lg h-40 object-cover object-top"
+      src={urlImage}
+      alt="Project Image"
+    />
+
+    <div class="flex gap-2">
+      {
+        urlRepository && (
+          <ButtonLink
+            class="bg-neutral-800 py-2.5 flex-1 rounded-lg"
+            href={urlRepository}
+          >
+            <GitHub class="size-4 text-neutral-50" />
+          </ButtonLink>
+        )
+      }
+
+      {
+        urlDeploy && (
+          <ButtonLink
+            class="bg-neutral-800 py-2.5 flex-1 rounded-lg"
+            href={urlDeploy}
+          >
+            <ExternalLink class="size-4 text-neutral-50" />
+          </ButtonLink>
+        )
+      }
+    </div>
+  </footer>
+</article>
