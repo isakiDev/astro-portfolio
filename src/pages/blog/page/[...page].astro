@@ -18,14 +18,13 @@ if (Number.isNaN(pageNumber) || pageNumber < 1) {
   return Astro.redirect("/");
 }
 
-const blog = await getCollection("blog", ({ data }) => {
-  return data.draft === false;
-});
+const blog = await getCollection("blog", ({ data }) => !data.draft);
+blog.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const { paginatedItems, currentPage, totalPages } = paginate({
   items: blog,
   currentPage: pageNumber,
-  perPage: 3,
+  perPage: 4,
 });
 
 if (pageNumber > totalPages) {
@@ -46,7 +45,7 @@ const breadcrumbs = [
 <Layout
   title={`Blog - Página ${currentPage} | Gaspar Castillo - Software Developer`}
 >
-  <ContentWrapper>
+  <ContentWrapper class="home-content">
     <Breadcrumb breadcrumbs={breadcrumbs} />
 
     <main>
