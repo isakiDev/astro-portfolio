@@ -1,13 +1,12 @@
 ---
 import { Image } from "astro:assets";
 
-import ButtonLink from "../ButtonLink.astro";
-import SkillBadge from "../SkillBadge.astro";
-
-import GitHub from "@shared/icons/GitHub.astro";
-import ExternalLink from "@shared/icons/ExternalLink.astro";
+import GitHub from "@shared/components/icons/GitHub.astro";
+import ExternalLink from "@shared/components/icons/ExternalLink.astro";
 
 import { type Project } from "@features/portfolio/types/portfolio.interface";
+import SkillBadge from "@shared/components/ui/SkillBadge.astro";
+import ButtonLink from "@shared/components/ui/ButtonLink.astro";
 
 interface Props {
   project: Project;

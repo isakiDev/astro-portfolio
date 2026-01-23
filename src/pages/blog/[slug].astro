@@ -1,0 +1,45 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+
+import Layout from "@app/layouts/Layout.astro";
+import Breadcrumb from "@shared/components/ui/Breadcrumb.astro";
+import ContentWrapper from "@app/layouts/ContentWrapper.astro";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("blog", ({ data }) => {
+    return data.draft === false;
+  });
+
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const article = await getEntry("blog", slug);
+
+if (!article) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(article);
+
+const breadcrumbs = [
+  { name: "Inicio", href: "/" },
+  { name: "Blog", href: "/blog/page/1" },
+  { name: article.data.title },
+];
+---
+
+<Layout
+  title={`${article.data.title} | Blog - Gaspar Castillo - Software Developer`}
+>
+  <ContentWrapper>
+    <Breadcrumb breadcrumbs={breadcrumbs} />
+
+    <div class="prose dark:prose-invert max-w-none">
+      <Content />
+    </div>
+  </ContentWrapper>
+</Layout>

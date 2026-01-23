@@ -1,4 +1,6 @@
 ---
+import ChevronRight from "@shared/components/icons/ChevronRight.astro";
+
 interface Props {
   href: string;
   title: string;
@@ -10,14 +12,33 @@ const { href, title, date, description } = Astro.props;
 ---
 
 <article
-  class="px-6 pt-6 min-h-40 bg-card-dark hover:cursor-pointer duration-300 rounded-xl border border-border-dark relative dark:hover:border-gray-700"
+  class="group relative flex flex-col gap-3 p-6 bg-card-dark rounded-xl border border-border-dark outline outline-transparent hover:outline-gray-700 transition-all duration-300"
 >
   <a class="absolute inset-0 z-10" href={href}></a>
 
-  <header class="flex justify-between items-center">
-    <h2>{title}</h2>
-    <time class="text-gray-500 text-xs">{date}</time>
+  <header class="flex items-start justify-between gap-4">
+    <h3
+      class="text-lg font-semibold text-text-dark group-hover:text-white transition-colors line-clamp-2"
+    >
+      {title}
+    </h3>
+
+    <time class="text-xs text-muted-dark-1 whitespace-nowrap shrink-0"
+      >{date}</time
+    >
   </header>
 
-  <p class="text-muted-dark-0">{description}</p>
+  <p class="text-sm text-muted-dark-1 line-clamp-2">
+    {description}
+  </p>
+
+  <div
+    class="mt-auto flex items-center text-xs text-muted-dark-1 group-hover:text-white transition-colors"
+  >
+    <span>Leer más</span>
+
+    <ChevronRight
+      class={"size-3.5 ml-1 group-hover:translate-x-1 transition-transform"}
+    />
+  </div>
 </article>

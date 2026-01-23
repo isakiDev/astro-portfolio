@@ -1,0 +1,41 @@
+---
+import ChevronRight from "@shared/components/icons/ChevronRight.astro";
+
+interface BreadcrumbItem {
+  name: string;
+  href?: string;
+}
+
+interface Props {
+  breadcrumbs: BreadcrumbItem[];
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<nav>
+  <ol class="inline-flex text-muted-dark-1 font-semibold">
+    {
+      breadcrumbs.map(({ name, href }, index) => {
+        const isLastChild = index + 1 === breadcrumbs.length;
+
+        return (
+          <li
+            class:list={[
+              "flex items-center",
+              {
+                "text-text-dark cursor-default": !href,
+              },
+            ]}
+          >
+            <a class="not-last:hover:text-muted-dark-0" href={href}>
+              {name}
+            </a>
+
+            {!isLastChild && <ChevronRight class={"size-4 mx-1"} />}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
