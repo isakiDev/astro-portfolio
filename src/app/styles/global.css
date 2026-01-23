@@ -14,31 +14,31 @@
   --color-muted-dark-1: #a1a1a1;
 }
 
-
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
     @apply bg-background-dark text-text-dark;
   }
 
+  /* Estilos para el Portfolio / Home */
   .home-content {
-    h1 {
-      @apply text-3xl sm:text-4xl font-semibold tracking-tight;
+    & h1 {
+      @apply text-3xl sm:text-4xl font-semibold tracking-tight text-text-dark;
     }
 
-    h2 {
-      @apply text-2xl sm:text-3xl font-semibold tracking-tight;
+    & h2 {
+      @apply text-2xl sm:text-3xl font-semibold tracking-tight text-text-dark;
     }
 
-    h3 {
-      @apply text-lg sm:text-xl font-semibold;
+    & h3 {
+      @apply text-lg sm:text-xl font-semibold text-text-dark;
     }
 
-    h4 {
+    & h4 {
       @apply text-sm sm:text-base font-medium text-muted-dark-0;
     }
 
-    p {
+    & p {
       @apply text-sm sm:text-base text-muted-dark-1 leading-relaxed;
     }
   }
