@@ -4,6 +4,8 @@ import vercel from '@astrojs/vercel';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import expressiveCode from 'astro-expressive-code';
+
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
@@ -13,5 +15,8 @@ export default defineConfig({
   },
   server: {
     host: true
-  }
+  },
+  integrations: [expressiveCode({
+    themes: ['tokyo-night']
+  })]
 });
