@@ -10,13 +10,13 @@ import expressiveCode from 'astro-expressive-code';
 export default defineConfig({
   output: 'static',
   adapter: vercel(),
-  vite: {
-    plugins: [tailwindcss()],
-  },
   server: {
     host: true
   },
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [expressiveCode({
     themes: ['tokyo-night']
-  })]
+  })],
 });
