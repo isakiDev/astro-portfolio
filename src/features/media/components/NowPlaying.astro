@@ -1,15 +1,22 @@
 ---
-import { getNowPlaying } from "../services/now-playing.service";
+import {
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET,
+  SPOTIFY_REFRESH_TOKEN,
+} from "astro:env/server";
 
-import Vinyl from "@shared/components/ui/Vinyl.astro";
+import { getNowPlaying } from "@features/media/services/now-playing.service";
+
 import Offline from "@shared/components/icons/Offline.astro";
+import Vinyl from "@shared/components/ui/Vinyl.astro";
 
+import Spotify from "@shared/components/icons/Spotify.astro";
 import { nowPlayingAdapter } from "@shared/utils/now-playing.adapter";
 
 const nowPlaying = await getNowPlaying({
-  clientId: import.meta.env.PUBLIC_SPOTIFY_CLIENT_ID,
-  clientSecret: import.meta.env.SECRET_SPOTIFY_CLIENT_SECRET,
-  refreshToken: import.meta.env.SECRET_SPOTIFY_REFRESH_TOKEN,
+  clientId: SPOTIFY_CLIENT_ID,
+  clientSecret: SPOTIFY_CLIENT_SECRET,
+  refreshToken: SPOTIFY_REFRESH_TOKEN,
 });
 
 const {
@@ -30,15 +37,31 @@ const {
 ---
 
 <aside
-  class="outline outline-green-950 bg-card-dark rounded-2xl w-fit py-2 px-3 flex items-center gap-4"
+  class:list={[
+    "flex w-fit items-center gap-4 rounded-2xl outline p-3 pr-5 backdrop-blur-sm",
+    {
+      "outline-green-500/30 bg-green-950/10 shadow-[0_0_15px_-3px_rgba(34,197,94,0.2)]":
+        isPlaying,
+    },
+    { "outline-border-dark bg-card-dark": !isPlaying },
+  ]}
 >
   <Vinyl imageUrl={albumImageUrl} isPlaying={!!isPlaying} />
 
-  <div>
-    <h2 title={title} class="text-sm truncate max-w-32 text-green-600">
+  <div class="flex flex-col justify-center">
+    <div class="flex items-center gap-1 mb-1">
+      <Spotify />
+      <span class="text-xs font-medium text-text-dark/50">Spotify</span>
+    </div>
+
+    <h2
+      class="text-sm font-bold text-text-dark max-w-32 truncate"
+      title={title}
+    >
       {title}
     </h2>
-    <p title={artist} class="text-xs truncate max-w-32">
+
+    <p class="text-xs text-text-dark/60 max-w-32 truncate" title={artist}>
       {artist}
     </p>
   </div>

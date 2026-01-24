@@ -1,7 +1,7 @@
 ---
 import type { TimelineData } from "@shared/types/time-line.interface";
 import ButtonLink from "../ButtonLink.astro";
-import ArrowRight from "@shared/components/icons/ArrowRight.astro";
+import ChevronRight from "@shared/components/icons/ChevronRight.astro";
 
 interface Props {
   extraDetails: TimelineData["extraDetails"];
@@ -27,9 +27,16 @@ const { extraDetails } = Astro.props;
           <p>{description}</p>
 
           {url && (
-            <ButtonLink href={url} class="text-muted-dark-0 pt-4 group">
-              Ver detalles
-              <ArrowRight class="ml-0.5 opacity-70 group-hover:opacity-100 duration-200 group-hover:translate-x-[1.5px]" />
+            <ButtonLink
+              target="_blank"
+              class={
+                "text-sm text-muted-dark-1 hover:text-text-dark gap-1 mt-4"
+              }
+              href={url}
+            >
+              <span>Ver detalles</span>
+
+              <ChevronRight class="size-3.5 group-hover:translate-x-1 transition-transform" />
             </ButtonLink>
           )}
         </li>

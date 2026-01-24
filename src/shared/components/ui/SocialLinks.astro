@@ -7,7 +7,12 @@ import { mockSocials } from "@features/portfolio/data/socials.mock";
 <nav class="flex items-center gap-4">
   {
     mockSocials?.map(({ name, href, icon: Icon }) => (
-      <ButtonLink aria-label={name} href={href} class="text-muted-dark-1">
+      <ButtonLink
+        target="_blank"
+        aria-label={name}
+        href={href}
+        class="text-muted-dark-1"
+      >
         <Icon />
       </ButtonLink>
     ))
