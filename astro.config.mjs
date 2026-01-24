@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import vercel from '@astrojs/vercel';
 
@@ -10,13 +10,17 @@ import expressiveCode from 'astro-expressive-code';
 export default defineConfig({
   output: 'static',
   adapter: vercel(),
-  server: {
-    host: true
-  },
   vite: {
     plugins: [tailwindcss()],
   },
   integrations: [expressiveCode({
     themes: ['tokyo-night']
   })],
+  env: {
+    schema: {
+      SPOTIFY_CLIENT_ID: envField.string({ context: 'server', access: 'secret' }),
+      SPOTIFY_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret' }),
+      SPOTIFY_REFRESH_TOKEN: envField.string({ context: 'server', access: 'secret' }),
+    }
+  }
 });
