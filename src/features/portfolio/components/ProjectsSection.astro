@@ -1,0 +1,32 @@
+---
+import ProjectCard from "@features/portfolio/components/ProjectCard.astro";
+
+import ButtonLink from "@shared/components/ui/ButtonLink.astro";
+import Star from "@shared/components/icons/Star.astro";
+
+import { mockProjects } from "../data/projects.mock";
+import ChevronRight from "@shared/components/icons/ChevronRight.astro";
+---
+
+<section class="bg-card-dark rounded-2xl p-8 flex flex-col gap-6">
+  <div class="flex gap-4 items-center">
+    <Star class={"size-6"} />
+    <h2>Proyectos</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-3 mb-4">
+    {mockProjects.map((project) => <ProjectCard project={project} />)}
+  </div>
+
+  <ButtonLink
+    target="_blank"
+    class={"text-sm text-muted-dark-1 hover:text-text-dark gap-1"}
+    href="https://github.com/isakiDev?tab=repositories"
+  >
+    <span>Más proyectos</span>
+
+    <ChevronRight
+      class="size-3.5 group-hover:translate-x-1 transition-transform"
+    />
+  </ButtonLink>
+</section>
