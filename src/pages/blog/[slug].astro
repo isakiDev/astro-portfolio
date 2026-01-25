@@ -8,6 +8,7 @@ import Clock from "@shared/components/icons/Clock.astro";
 import Breadcrumb from "@shared/components/ui/Breadcrumb.astro";
 
 import { formatDate } from "@shared/utils/format-date.util";
+import { getReadingTime } from "@shared/utils/reading-time.util";
 
 export async function getStaticPaths() {
   const articles = await getCollection("blog", ({ data }) => {
@@ -34,6 +35,8 @@ const breadcrumbs = [
   { name: "Blog", href: "/blog/page/1" },
   { name: article.data.title },
 ];
+
+const readingTime = getReadingTime(article.body);
 ---
 
 <Layout
@@ -60,7 +63,7 @@ const breadcrumbs = [
 
           <div class="flex gap-1 items-center">
             <Clock class={"size-4"} />
-            <span>Minutos de lectura</span>
+            <span>{readingTime}</span>
           </div>
 
           {
