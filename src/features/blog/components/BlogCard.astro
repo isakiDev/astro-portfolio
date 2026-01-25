@@ -1,5 +1,6 @@
 ---
 import ChevronRight from "@shared/components/icons/ChevronRight.astro";
+import Clock from "@shared/components/icons/Clock.astro";
 import ButtonLink from "@shared/components/ui/ButtonLink.astro";
 
 interface Props {
@@ -7,9 +8,10 @@ interface Props {
   title: string;
   date: string;
   description: string;
+  readingTime: string;
 }
 
-const { href, title, date, description } = Astro.props;
+const { href, title, date, description, readingTime } = Astro.props;
 ---
 
 <article
@@ -25,7 +27,10 @@ const { href, title, date, description } = Astro.props;
         {title}
       </h3>
 
-      <span class="text-xs text-muted-dark-1">Minutos de lectura</span>
+      <div class="flex gap-1 items-center text-muted-dark-1">
+        <Clock class={"size-3"} />
+        <span class="text-xs">{readingTime}</span>
+      </div>
     </div>
 
     <time class="text-xs text-muted-dark-1 whitespace-nowrap shrink-0"
