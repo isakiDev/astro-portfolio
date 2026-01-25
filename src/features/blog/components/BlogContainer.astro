@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import BlogCard from "./BlogCard.astro";
 import { formatDate } from "@shared/utils/format-date.util";
+import { getReadingTime } from "@shared/utils/reading-time.util";
 
 interface Props {
 	items: CollectionEntry<"blog">[];
@@ -12,9 +13,11 @@ const { items } = Astro.props;
 
 <ul class="flex flex-col gap-4">
 	{
-		items.map(({ data, collection, slug }) => {
+		items.map(({ data, collection, slug, body }) => {
 			const { title, date, description } = data;
+
 			const formattedDate = formatDate(date);
+			const readingTime = getReadingTime(body);
 
 			return (
 				<li>
@@ -23,6 +26,7 @@ const { items } = Astro.props;
 						title={title}
 						date={formattedDate}
 						description={description}
+						readingTime={readingTime}
 					/>
 				</li>
 			);
