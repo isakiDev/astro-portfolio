@@ -13,6 +13,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  server: {
+    host: true
+  },
   integrations: [expressiveCode({
     themes: ['tokyo-night']
   })],
