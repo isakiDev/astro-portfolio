@@ -42,4 +42,68 @@
       @apply text-sm sm:text-base text-muted-dark-1 leading-relaxed;
     }
   }
+
+  /* Dynamic styles for hamburger animation */
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    @apply absolute w-5 h-0.5 bg-text-dark left-0 transition-all duration-300;
+  }
+
+  .hamburger::before {
+    @apply -top-2;
+  }
+
+  .hamburger::after {
+    @apply -bottom-2;
+  }
+
+  .mobile-toggle[aria-expanded="true"] .hamburger {
+    @apply rotate-45;
+  }
+
+  .mobile-toggle[aria-expanded="true"] .hamburger::before {
+    @apply top-0 rotate-90;
+  }
+
+  .mobile-toggle[aria-expanded="true"] .hamburger::after {
+    @apply bottom-0 opacity-0;
+  }
+
+  .nav-content.open {
+    @apply translate-x-0;
+  }
+
+  .nav-content.open~.overlay {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  .nav-link.active::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-1 bg-primary-dark rounded-r-full;
+  }
+
+  .nav-link[data-level="1"] {
+    @apply font-medium text-text-dark;
+  }
+
+  .nav-link[data-level="2"] {
+    @apply pl-6 text-sm;
+  }
+
+  .nav-link[data-level="3"] {
+    @apply pl-9 text-xs;
+  }
+
+  .nav-link:hover {
+    @apply bg-background-dark border-border-dark;
+  }
+
+  .nav-link:focus-visible {
+    @apply outline-none ring-2 ring-primary-dark ring-opacity-50;
+  }
+
+  .nav-children .nav-link.active {
+    @apply text-text-dark;
+  }
 }
