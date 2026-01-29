@@ -3,9 +3,10 @@ import type { CollectionEntry } from "astro:content";
 
 import BlogCard from "@features/blog/components/BlogCard.astro";
 import ChevronRight from "@shared/components/icons/ChevronRight.astro";
-import { formatDate } from "@shared/utils/format-date.util";
 import Newspaper from "@shared/components/icons/Newspaper.astro";
 import ButtonLink from "@shared/components/ui/ButtonLink.astro";
+import { formatDate } from "@shared/utils/format-date.util";
+import { getReadingTime } from "@shared/utils/reading-time.util";
 
 interface Props {
   items: CollectionEntry<"blog">[];
@@ -35,9 +36,11 @@ const { items } = Astro.props;
 
   <div class="grid gap-4 md:grid-cols-2">
     {
-      items.map(({ data, collection, slug }) => {
+      items.map(({ data, collection, slug, body }) => {
         const { title, date, description } = data;
+
         const formattedDate = formatDate(date);
+        const readingTime = getReadingTime(body);
 
         return (
           <BlogCard
@@ -45,6 +48,7 @@ const { items } = Astro.props;
             title={title}
             date={formattedDate}
             description={description}
+            readingTime={readingTime}
           />
         );
       })
