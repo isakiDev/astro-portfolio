@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 import ButtonLink from "@shared/components/ui/ButtonLink.astro";
-import Download from "@shared/icons/Download.astro";
+import Download from "@shared/components/icons/Download.astro";
 import SocialLinks from "@shared/components/ui/SocialLinks.astro";
 import WorkBadge from "@shared/components/ui/WorkBadge.astro";
 ---
@@ -22,7 +22,7 @@ import WorkBadge from "@shared/components/ui/WorkBadge.astro";
         width={200}
         src="https://res.cloudinary.com/dzn3nempv/image/upload/v1758264380/portfolio/medidate_memoji_1_tncdtd.png"
         alt="Memoji Image Profile"
-        class="size-60 object-cover absolute sm:static sm:size-48 bottom-0 right-0 sm:opacity-60 opacity-30 z-10"
+        class="size-60 object-cover absolute sm:static sm:size-48 bottom-0 right-0 sm:opacity-60 opacity-10 z-10"
       />
     </picture>
   </figure>
@@ -38,18 +38,29 @@ import WorkBadge from "@shared/components/ui/WorkBadge.astro";
       <span class="text-green-500 font-semibold">Software Developer</span>
 
       <p class="pt-2">
-        Apasionado por programar, con foco en
+        Me gusta entender bien los
+        <span class="text-muted-dark-0 font-semibold">problemas</span>
+        antes de escribir una línea de código, para construir
+        <span class="text-muted-dark-0 font-semibold">soluciones</span>
+        claras, eficientes y mantenibles, moviéndome entre
         <span
-          class="text-muted-dark-0 underline decoration-green-800 font-semibold underline-offset-4"
-          >Backend</span
-        > y en construir soluciones que funcionen de verdad. Me encanta resolver problemas,
-        probar distintas ideas y aprender de todo lo que hago, ya sea en backend o
-        frontend.
+          class="underline decoration-green-800 underline-offset-4 font-semibold"
+        >
+          backend
+        </span>
+        y
+        <span
+          class="underline decoration-green-800 underline-offset-4 font-semibold"
+        >
+          frontend
+        </span>
+        según lo que el desafío necesite.
       </p>
     </div>
 
-    <footer class="ml-auto z-20">
+    <footer class="ml-auto z-20 mt-4">
       <ButtonLink
+        target="_blank"
         href="cv_gaspar_castillo.pdf"
         role="link"
         class="bg-zinc-900 opacity-100 sm:opacity-85 px-4 py-2 text-text-dark text-sm outline-1 outline-border-dark rounded-xl"

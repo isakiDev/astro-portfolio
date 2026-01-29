@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BlogCard from "@features/blog/components/BlogCard.astro";
+import ChevronRight from "@shared/components/icons/ChevronRight.astro";
+import Newspaper from "@shared/components/icons/Newspaper.astro";
+import ButtonLink from "@shared/components/ui/ButtonLink.astro";
+import { formatDate } from "@shared/utils/format-date.util";
+import { getReadingTime } from "@shared/utils/reading-time.util";
+
+interface Props {
+  items: CollectionEntry<"blog">[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="bg-card-dark rounded-2xl p-8 flex flex-col gap-6">
+  <header class="flex items-center justify-between">
+    <div class="flex gap-4 items-center">
+      <Newspaper class={"size-6"} />
+      <h2>Blog</h2>
+    </div>
+
+    <ButtonLink
+      class={"text-sm text-muted-dark-1 hover:text-text-dark gap-1"}
+      href="/blog/page/1"
+    >
+      <span>Ver todos</span>
+
+      <ChevronRight
+        class="size-3.5 group-hover:translate-x-1 transition-transform"
+      />
+    </ButtonLink>
+  </header>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    {
+      items.map(({ data, collection, slug, body }) => {
+        const { title, date, description } = data;
+
+        const formattedDate = formatDate(date);
+        const readingTime = getReadingTime(body);
+
+        return (
+          <BlogCard
+            href={`/${collection}/${slug}`}
+            title={title}
+            date={formattedDate}
+            description={description}
+            readingTime={readingTime}
+          />
+        );
+      })
+    }
+  </div>
+</section>

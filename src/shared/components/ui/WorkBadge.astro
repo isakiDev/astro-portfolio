@@ -16,8 +16,13 @@ const { isWorking = false }: Props = Astro.props;
       class="absolute inline-flex size-1.5 animate-ping rounded-full opacity-75 bg-green-300"
     ></span>
     <span
-      class=`relative inline-flex size-1.5 rounded-full ${isWorking ? 'bg-red-400' : 'bg-green-400'}`
-    ></span>
+      class:list={[
+        "relative inline-flex size-1.5 rounded-full",
+        {
+          "bg-red-400": isWorking,
+          "bg-green-400": !isWorking,
+        },
+      ]}></span>
   </span>
   {
     isWorking

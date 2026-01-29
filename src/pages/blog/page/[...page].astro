@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+
+import Layout from "@app/layouts/Layout.astro";
+
+import BlogContainer from "@features/blog/components/BlogContainer.astro";
+import Pagination from "@shared/components/ui/Pagination.astro";
+
+import { paginate } from "@shared/utils/pagination.util";
+import Breadcrumb from "@shared/components/ui/Breadcrumb.astro";
+import ContentWrapper from "@app/layouts/ContentWrapper.astro";
+
+export const prerender = false;
+
+const pageNumber = Number(Astro.params.page);
+
+if (Number.isNaN(pageNumber) || pageNumber < 1) {
+  return Astro.redirect("/");
+}
+
+const blog = await getCollection("blog", ({ data }) => !data.draft);
+blog.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const { paginatedItems, currentPage, totalPages } = paginate({
+  items: blog,
+  currentPage: pageNumber,
+  perPage: 4,
+});
+
+if (pageNumber > totalPages) {
+  return Astro.redirect("/");
+}
+
+const breadcrumbs = [
+  {
+    name: "Inicio",
+    href: "/",
+  },
+  {
+    name: "Blog",
+  },
+];
+---
+
+<Layout
+  title={`Blog - Página ${currentPage} | Gaspar Castillo - Software Developer`}
+>
+  <ContentWrapper class="home-content">
+    <Breadcrumb breadcrumbs={breadcrumbs} />
+
+    <main>
+      <BlogContainer items={paginatedItems} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
+    </main>
+  </ContentWrapper>
+</Layout>

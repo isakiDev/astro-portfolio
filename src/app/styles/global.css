@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
 
 @theme {
   --color-background-dark: #0f0f0f;
@@ -12,30 +14,32 @@
   --color-muted-dark-1: #a1a1a1;
 }
 
-
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
     @apply bg-background-dark text-text-dark;
   }
 
-  h1 {
-    @apply text-3xl sm:text-4xl font-semibold tracking-tight;
-  }
+  /* Estilos para el Portfolio / Home */
+  .home-content {
+    & h1 {
+      @apply text-3xl sm:text-4xl font-semibold tracking-tight text-text-dark;
+    }
 
-  h2 {
-    @apply text-2xl sm:text-3xl font-semibold tracking-tight;
-  }
+    & h2 {
+      @apply text-2xl sm:text-3xl font-semibold tracking-tight text-text-dark;
+    }
 
-  h3 {
-    @apply text-lg sm:text-xl font-semibold;
-  }
+    & h3 {
+      @apply text-lg sm:text-xl font-semibold text-text-dark;
+    }
 
-  h4 {
-    @apply text-sm sm:text-base font-medium text-muted-dark-0;
-  }
+    & h4 {
+      @apply text-sm sm:text-base font-medium text-muted-dark-0;
+    }
 
-  p {
-    @apply text-sm sm:text-base text-muted-dark-1 leading-relaxed;
+    & p {
+      @apply text-sm sm:text-base text-muted-dark-1 leading-relaxed;
+    }
   }
 }

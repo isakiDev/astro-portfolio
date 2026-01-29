@@ -7,16 +7,16 @@ const { class: className } = Astro.props;
 ---
 
 <svg
-  class={className}
+  class:list={[className, "mt-0.5"]}
   xmlns="http://www.w3.org/2000/svg"
   width="20"
   height="20"
+  viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
+  stroke-width="1.75"
   stroke-linecap="round"
   stroke-linejoin="round"
-  stroke-width="1.75"
-  viewBox="0 0 24 24"
-  ><path stroke="none" d="M0 0h24v24H0z"></path><path
-    d="M5 12h14m-4 4 4-4m-4-4 4 4"></path></svg
 >
+  <path d="m9 18 6-6-6-6"></path>
+</svg>

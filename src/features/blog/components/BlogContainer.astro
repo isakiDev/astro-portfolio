@@ -1,49 +1,35 @@
 ---
-import { getCollection } from "astro:content";
-
+import type { CollectionEntry } from "astro:content";
 import BlogCard from "./BlogCard.astro";
-
-import { paginate } from "@shared/utils/pagination.util";
 import { formatDate } from "@shared/utils/format-date.util";
-import Pagination from "@shared/components/ui/Pagination.astro";
+import { getReadingTime } from "@shared/utils/reading-time.util";
 
-const pageParam = Number(Astro.params.id);
+interface Props {
+	items: CollectionEntry<"blog">[];
+}
 
-const blog = await getCollection("blog", ({ data }) => {
-  return data.draft === false;
-});
-
-const test = Array(20)
-  .fill(null)
-  .map(() => blog[0]);
-
-const { paginatedItems, currentPage, totalPages } = paginate({
-  items: test.map(({ data, slug, collection }) => ({
-    ...data,
-    href: `/${collection}/${slug}`,
-  })),
-  currentPage: pageParam,
-  perPage: 3,
-});
+const { items } = Astro.props;
 ---
 
 <ul class="flex flex-col gap-4">
-  {
-    paginatedItems.map(({ title, date, description, href }) => {
-      const formatedDate = formatDate(date);
+	{
+		items.map(({ data, collection, slug, body }) => {
+			const { title, date, description } = data;
 
-      return (
-        <li>
-          <BlogCard
-            href={href}
-            title={title}
-            date={formatedDate}
-            description={description}
-          />
-        </li>
-      );
-    })
-  }
+			const formattedDate = formatDate(date);
+			const readingTime = getReadingTime(body);
 
-  <Pagination currentPage={currentPage} totalPages={totalPages} />
+			return (
+				<li>
+					<BlogCard
+						href={`/${collection}/${slug}`}
+						title={title}
+						date={formattedDate}
+						description={description}
+						readingTime={readingTime}
+					/>
+				</li>
+			);
+		})
+	}
 </ul>
