@@ -2,7 +2,16 @@
 title: "STUPID - S: Amor y odio por los Singletons"
 description: "Descubre por qué los Singletons, aunque parecen una buena idea, son considerados una mala práctica en el código limpio"
 date: 2026-02-01
-tags: ["patrones-de-diseño", "code-smell", "arquitectura", "typescript", "inversion-de-dependencias", "clean-code", "singleton"]
+tags:
+  [
+    "patrones-de-diseño",
+    "code-smell",
+    "arquitectura",
+    "typescript",
+    "inversion-de-dependencias",
+    "clean-code",
+    "singleton",
+  ]
 draft: false
 ---
 
@@ -58,13 +67,13 @@ Un cambio en un lugar afecta a toda la aplicación.
 ```ts title="user.service.test.ts"
 test("UserService create user", () => {
   const service = new UserService();
-  
+
   // ❌ You cannot mock the Logger
   // ❌ You cannot reset the state between tests
   // ❌ One test affects other tests
-  
+
   service.createUser("John Doe");
-  
+
   // How do you verify that the log was called?
   expect(Logger.getInstance().getLogs()).toContain("Creating user: John Doe");
 });
@@ -82,7 +91,7 @@ test("Another test", () => {
 // Thread 1
 Logger.getInstance().log("User 1 created");
 
-// Thread 2  
+// Thread 2
 Logger.getInstance().log("User 2 created");
 
 // Unpredictable outcome
@@ -92,9 +101,9 @@ console.log(Logger.getInstance().getLogs());
 
 ### 5. Configuración difícil
 
-- ¿Cómo configuro diferentes instancias en development vs production?  
-- ¿Cómo uso una base de datos de pruebas?  
-- ¿Cómo cambio el logger para un componente específico?  
+- ¿Cómo configuro diferentes instancias en development vs production?
+- ¿Cómo uso una base de datos de pruebas?
+- ¿Cómo cambio el logger para un componente específico?
 
 Con Singleton, esto se vuelve complicado.
 
@@ -122,16 +131,17 @@ class UserService {
 test("UserService create user", () => {
   const mockLogger = { log: jest.fn() };
   const service = new UserService(mockLogger);
-  
+
   service.createUser("John Doe");
-  
+
   expect(mockLogger.log).toHaveBeenCalledWith("Creating user: John Doe");
 });
 ```
 
 ## 🤏 Aclaración importante
 
-Un Singleton garantiza que solo exista una única instancia de una clase, lo que en muchos casos es útil: 
+Un Singleton garantiza que solo exista una única instancia de una clase, lo que en muchos casos es útil:
+
 - Conexión a base de datos
 - Logger avanzado
 - Caché
@@ -140,13 +150,14 @@ Un Singleton garantiza que solo exista una única instancia de una clase, lo que
 El patrón Singleton no es malo por sí mismo. El problema aparece cuando cualquier clase puede agarrar la instancia sin avisar, creando acoplamiento global y dolores de cabeza al testear o mantener el código.
 
 ---
-  
+
 ## Conclusión
 
 El uso de Singleton puede generar problemas debido al **acceso global**, lo que provoca dependencias ocultas y un acoplamiento excesivo del código.
 
-La solución es sencilla:  
-- Evita que las clases busquen sus dependencias por sí mismas.  
+La solución es sencilla:
+
+- Evita que las clases busquen sus dependencias por sí mismas.
 - Pásalas explícitamente a través del constructor, preferiblemente creando las instancias en un punto central de la aplicación (el root).
 
 > **Deja que las clases reciban lo que necesitan, en lugar de ir a buscarlas por sí mismas.**
