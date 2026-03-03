@@ -51,28 +51,27 @@ Una vez definido el contrato, creamos la implementación específica. En este ej
 Si en el futuro decides cambiar de herramienta, solo tendrías que crear una nueva clase que implemente la interfaz UserRepository.
 
 ```ts title="prisma-user.repository.ts"
-import { PrismaClient } from '@prisma/client';
-import { UserRepository, User, CreateUserDto } from './user.repository';
+import { PrismaClient } from "@prisma/client";
+import { UserRepository, User, CreateUserDto } from "./user.repository";
 
 const prisma = new PrismaClient();
 
 export class PrismaUserRepository implements UserRepository {
-
   async create(userData: CreateUserDto): Promise<User> {
     return await prisma.user.create({
-      data: userData
+      data: userData,
     });
   }
 
   async findById(id: string): Promise<User | null> {
     return await prisma.user.findUnique({
-      where: { id }
+      where: { id },
     });
   }
 
   async findByEmail(email: string): Promise<User | null> {
     return await prisma.user.findUnique({
-      where: { email }
+      where: { email },
     });
   }
 }
@@ -83,7 +82,7 @@ export class PrismaUserRepository implements UserRepository {
 La verdadera ventaja se observa cuando inyectamos el repositorio en un servicio. El servicio no sabe que se está usando Prisma, solo sabe que el repositorio cumple con el contrato definido.
 
 ```ts title="user.service.ts"
-import { UserRepository, User, CreateUserDto } from './user.repository';
+import { UserRepository, User, CreateUserDto } from "./user.repository";
 
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
@@ -93,7 +92,7 @@ export class UserService {
 
     const existingUser = await this.userRepository.findByEmail(userData.email);
 
-    if (existingUser) throw new Error('The email is already registered');
+    if (existingUser) throw new Error("The email is already registered");
 
     // Business logic...
 
@@ -103,7 +102,7 @@ export class UserService {
   async getUserById(id: string): Promise<User> {
     const user = await this.userRepository.findById(id);
 
-    if (!user) throw new Error('User not found');
+    if (!user) throw new Error("User not found");
 
     return user;
   }
@@ -115,8 +114,8 @@ export class UserService {
 Para que el patrón funcione correctamente, necesitamos hacer configuración de nuestras dependencias:
 
 ```ts title="main.ts"
-import { PrismaUserRepository } from './prisma-user.repository';
-import { UserService } from './user.service';
+import { PrismaUserRepository } from "./prisma-user.repository";
+import { UserService } from "./user.service";
 
 async function main() {
   // Dependency configuration
@@ -126,13 +125,13 @@ async function main() {
   try {
     // Create a new user
     const newUser = await userService.createUser({
-      name: 'John Doe',
-      email: 'john@example.com'
+      name: "John Doe",
+      email: "john@example.com",
     });
 
-    console.log('User created:', newUser);
+    console.log("User created:", newUser);
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
   }
 }
 
@@ -146,7 +145,7 @@ Una de las mayores ventajas del patrón Repository es que facilita enormemente l
 ### 5. Implementación Mock para Testing
 
 ```ts title="mock-user.repository.ts"
-import { UserRepository, User, CreateUserDto } from './user.repository';
+import { UserRepository, User, CreateUserDto } from "./user.repository";
 
 export class MockUserRepository implements UserRepository {
   private users: User[] = [];
@@ -165,11 +164,11 @@ export class MockUserRepository implements UserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    return this.users.find(user => user.id === id) || null;
+    return this.users.find((user) => user.id === id) || null;
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.users.find(user => user.email === email) || null;
+    return this.users.find((user) => user.email === email) || null;
   }
 
   // Auxiliary method for testing
@@ -183,10 +182,10 @@ export class MockUserRepository implements UserRepository {
 ### 6. Pruebas Unitarias
 
 ```ts title="user.service.test.ts"
-import { UserService } from './user.service';
-import { MockUserRepository } from './mock-user.repository';
+import { UserService } from "./user.service";
+import { MockUserRepository } from "./mock-user.repository";
 
-describe('UserService', () => {
+describe("UserService", () => {
   let userService: UserService;
   let mockRepository: MockUserRepository;
 
@@ -196,42 +195,42 @@ describe('UserService', () => {
     mockRepository.clear();
   });
 
-  describe('createUser', () => {
-    it('should create a user successfully', async () => {
+  describe("createUser", () => {
+    it("should create a user successfully", async () => {
       const userData = {
-        name: 'Test User',
-        email: 'test@example.com'
+        name: "Test User",
+        email: "test@example.com",
       };
 
       const result = await userService.createUser(userData);
 
       expect(result).toEqual({
-        id: '1',
-        ...userData
+        id: "1",
+        ...userData,
       });
     });
 
-    it('should throw an error if the email already exists', async () => {
+    it("should throw an error if the email already exists", async () => {
       const userData = {
-        name: 'Test User',
-        email: 'test@example.com'
+        name: "Test User",
+        email: "test@example.com",
       };
 
       // Create the first user
       await userService.createUser(userData);
 
       // Try creating another one with the same email
-      await expect(userService.createUser(userData))
-        .rejects
-        .toThrow('The email is already registered');
+      await expect(userService.createUser(userData)).rejects.toThrow(
+        "The email is already registered",
+      );
     });
   });
 
-  describe('getUserById', () => {
-    it('should return the user if it exists', async () => {
+  describe("getUserById", () => {
+    it("should return the user if it exists", async () => {
       const userData = {
-        name: 'Test User',
-        email: 'test@example.com'
+        name: "Test User",
+        email: "test@example.com",
       };
       const createdUser = await userService.createUser(userData);
 
@@ -240,10 +239,10 @@ describe('UserService', () => {
       expect(foundUser).toEqual(createdUser);
     });
 
-    it('should throw an error if the user does not exist', async () => {
-      await expect(userService.getUserById('999'))
-        .rejects
-        .toThrow('User not found');
+    it("should throw an error if the user does not exist", async () => {
+      await expect(userService.getUserById("999")).rejects.toThrow(
+        "User not found",
+      );
     });
   });
 });
@@ -327,6 +326,7 @@ interface ProductRepository {
 ## Conclusión
 
 El patrón Repository es una herramienta fundamental en la arquitectura de software limpia que proporciona:
+
 - **Desacoplamiento** entre la lógica de negocio y la persistencia
 - **Testabilidad** mejorada mediante mocks
 - **Flexibilidad** para cambiar la infraestructura
