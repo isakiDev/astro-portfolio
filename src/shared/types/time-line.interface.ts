@@ -6,7 +6,8 @@ export interface Detail {
 
 export interface TimelineData {
   title: string;
-  subTitle: { title: string, url?: string }
+  current?: boolean;
+  subTitle: { title: string; url?: string };
   date: string;
   extraDetails?: Detail[];
 }

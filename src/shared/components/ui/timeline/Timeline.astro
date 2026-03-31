@@ -13,10 +13,17 @@ const { items } = Astro.props;
 
 <ol class="relative border-s border-border-dark ml-2 space-y-4">
   {
-    items?.map((data) => (
+    items?.map((data, index) => (
       <li class="ms-3 pt-4 pl-5 rounded-xl duration-100">
         {/* line */}
-        <div class="absolute size-2 rounded-full mt-2 md:mt-2.5 -start-1 bg-neutral-800 outline-3 outline-zinc-400" />
+        <div
+          class:list={[
+            "absolute rounded-full mt-2 md:mt-2.5 outline-3 duration-300",
+            index === 0 && data.current
+              ? "size-3 bg-green-500 outline-green-500/30 shadow-[0_0_12px_rgba(52,211,153,0.5)] -start-1.5"
+              : "size-2 bg-neutral-800 outline-zinc-400 -start-1",
+          ]}
+        />
 
         <TimelineHeader {...data} />
 
