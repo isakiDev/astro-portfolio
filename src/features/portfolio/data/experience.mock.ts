@@ -2,6 +2,15 @@ import type { TimelineData } from "@shared/types/time-line.interface";
 
 export const mockExperience: TimelineData[] = [
   {
+    title: "Custom Software Engineering Associate",
+    current: true,
+    subTitle: {
+      title: "Accenture",
+      url: "https://www.linkedin.com/company/accenture/posts/?feedView=all",
+    },
+    date: "Marzo 2026 - Actualidad",
+  },
+  {
     title: "Data Governance Trainee",
     subTitle: {
       title: "Zurich Santander Chile",
@@ -43,7 +52,7 @@ export const mockExperience: TimelineData[] = [
     extraDetails: [
       {
         description:
-          "Desarrollo de módulos en PHP para sistemas de gestión (POS y autoatención), incluyendo impresoras y gestión de RR.HH."
+          "Desarrollo de módulos en PHP para sistemas de gestión (POS y autoatención), incluyendo impresoras y gestión de RR.HH.",
       },
     ],
   },
